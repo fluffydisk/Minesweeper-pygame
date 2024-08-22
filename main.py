@@ -1,15 +1,16 @@
 import pygame
-
 from ui import start_screen, play_screen, reload_screen
-from utils import SCREEN_WIDTH, SCREEN_HEIGHT, running, rect1_status, rect2_status, SCREEN_TYPE, mouse_pos_on_game_x,mouse_pos_on_game_y, reload, clicked_areas, bomb_area_cordinates, first_click
+from utils import SCREEN_WIDTH, SCREEN_HEIGHT, running, rect1_status, rect2_status, SCREEN_TYPE,\
+    mouse_pos_on_game_x,mouse_pos_on_game_y, reload, clicked_areas, bomb_area_cordinates, first_click,\
+    game_finished
 pygame.init()
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 start_screen(screen, rect1_status, rect2_status)
+remaining_flags=15
 
 while running:
-    reload=False
     left_mouse_clicked = False
     right_mouse_clicked = False
     reloading_in_progress = False
@@ -50,9 +51,15 @@ while running:
         else:
             rect2_status = "NOT_COLLIDED"
     if SCREEN_TYPE=="GAME":
-        if reload:
-            first_click=reload_screen(clicked_areas, bomb_area_cordinates, first_click)
-            SCREEN_TYPE = "STARTING"
-        first_click=play_screen(screen, mouse_pos, left_mouse_clicked, right_mouse_clicked, first_click)
+        if SCREEN_TYPE == "GAME":
+            if reload:
+                first_click, remaining_flags = reload_screen(clicked_areas, bomb_area_cordinates, first_click, remaining_flags)
+                SCREEN_TYPE = "STARTING"
+                reload = False
+            first_click, game_finished, remaining_flags, game_win = play_screen(screen, mouse_pos, left_mouse_clicked,right_mouse_clicked, first_click, remaining_flags)
+            if game_finished or game_win:
+                pygame.display.flip()
+                pygame.time.wait(2000)
+                reload = True
     pygame.display.flip()
 pygame.quit()

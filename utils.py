@@ -1,5 +1,6 @@
 import pygame
 running = True
+game_finished = False
 reload=False
 SCREEN_HEIGHT=600
 SCREEN_WIDTH=600
@@ -12,9 +13,14 @@ mouse_pos_on_game_y=0
 
 first_click = True
 
+number_of_bombs=15
+
+
 clicked_areas=[]
 bomb_area_cordinates=[]
 flag_area_cordinates=[]
+all_areas=[]
+
 
 bomb_png=pygame.image.load("images/bomb.png")
 bomb_png=pygame.transform.scale(bomb_png, (SCREEN_WIDTH/12, SCREEN_HEIGHT/12))
