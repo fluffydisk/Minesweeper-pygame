@@ -268,6 +268,29 @@ def play_screen(screen, mousepos, left_button_clicked, right_buton_clicked, firs
     return first_click, game_finished, remaining_flags, game_win
 
 
+def game_end(screen, game_end):
+    button1_rect = pygame.Rect(SCREEN_WIDTH/12*4, SCREEN_HEIGHT/12*5, SCREEN_WIDTH/12*4, SCREEN_HEIGHT/12*2)
+    font = pygame.font.Font(None, 50)
+    win=font.render("Kazandin", True, "white")
+    lose=font.render("Kaybettin", True, "white")
+    # Create a surface with per-pixel alpha for transparency
+    transparent_surface = pygame.Surface((button1_rect.width, button1_rect.height), pygame.SRCALPHA)
+    if game_end == "WIN":
+        transparent_surface.fill((0, 255, 0, 210))
+        screen.blit(transparent_surface, (button1_rect.x, button1_rect.y))
+        screen.blit(win, (SCREEN_WIDTH/24*9, SCREEN_HEIGHT/24*11))
+
+    elif game_end == "LOSE":
+        transparent_surface.fill((255, 0, 0, 210))
+        screen.blit(transparent_surface, (button1_rect.x, button1_rect.y))
+        screen.blit(lose, (SCREEN_WIDTH/24*9, SCREEN_HEIGHT/24*11))
+
+    # Blit the transparent surface onto the main screen
+
+
+    # Draw the black border around the rectangle
+    pygame.draw.rect(screen, "black", button1_rect, 5)
+
 def reload_screen(areas, cordinates, first_click, remaining_flags):
     remaining_flags=15
     first_click=True

@@ -1,5 +1,5 @@
 import pygame
-from ui import start_screen, play_screen, reload_screen
+from ui import start_screen, play_screen, reload_screen, game_end
 from utils import SCREEN_WIDTH, SCREEN_HEIGHT, running, rect1_status, rect2_status, SCREEN_TYPE,\
     mouse_pos_on_game_x,mouse_pos_on_game_y, reload, clicked_areas, bomb_area_cordinates, first_click,\
     game_finished
@@ -62,6 +62,10 @@ while running:
                 reload = False
             first_click, game_finished, remaining_flags, game_win = play_screen(screen, mouse_pos, left_mouse_clicked,right_mouse_clicked, first_click, remaining_flags)
             if game_finished or game_win:
+                if game_finished:
+                    game_end(screen, "LOSE")
+                elif game_win:
+                    game_end(screen, "WIN")
                 pygame.display.flip()
                 pygame.time.wait(2000)
                 reload = True

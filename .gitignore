@@ -1,7 +1,7 @@
 # Ignore compiled files
 *.class
 *.o
-*.so
+    *.so
 
 # Ignore Python bytecode files
 __pycache__/
