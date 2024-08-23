@@ -1,3 +1,21 @@
-.idea/
+# Ignore compiled files
+*.class
+*.o
+*.so
+
+# Ignore Python bytecode files
 __pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore development environment files
+.idea/
+.vscode/
 
