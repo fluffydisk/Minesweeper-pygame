@@ -6,6 +6,9 @@ from utils import SCREEN_WIDTH, SCREEN_HEIGHT, running, rect1_status, rect2_stat
 pygame.init()
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Mayin Tarlasi-Giris Ekrani")
+pygame.display.set_icon(pygame.image.load("images/minesweeper.jpg"))
+
 
 start_screen(screen, rect1_status, rect2_status)
 remaining_flags=15
@@ -52,6 +55,7 @@ while running:
             rect2_status = "NOT_COLLIDED"
     if SCREEN_TYPE=="GAME":
         if SCREEN_TYPE == "GAME":
+            pygame.display.set_caption("Mayin Tarlasi-Oyun Ekrani")
             if reload:
                 first_click, remaining_flags = reload_screen(clicked_areas, bomb_area_cordinates, first_click, remaining_flags)
                 SCREEN_TYPE = "STARTING"

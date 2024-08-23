@@ -248,11 +248,21 @@ def play_screen(screen, mousepos, left_button_clicked, right_buton_clicked, firs
 
 
     correct_flags=0
-
+    status_of_squares = every_square_position(bomb_area_cordinates)
+    check_list_for_non_bomb_areas=[]
+    completed=True
     for i in bomb_area_cordinates:
         if i in flag_area_cordinates:
             correct_flags+=1
-    if correct_flags==number_of_bombs:
+    for i in status_of_squares:
+        if i[1]!="BOMB":
+            check_list_for_non_bomb_areas.append(i[0])
+
+
+    for i in check_list_for_non_bomb_areas:
+        if i not in clicked_areas:
+            completed=False
+    if correct_flags==number_of_bombs and completed:
         game_win=True
 
     return first_click, game_finished, remaining_flags, game_win
